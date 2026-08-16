@@ -98,7 +98,7 @@
             <h2>About Ikhaya Golden Mic</h2>
             <p class="section-lead">
                 Ikhaya Golden Mic is a flagship youth talent development programme under the Nomduva Community Empowerment Project (NPO Registration: 308-012). 
-                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance abuse.
+                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance misuse through engagement in positive creative activities.
             </p>
             
             <div class="grid-3">
@@ -144,15 +144,110 @@
         </div>
     </section>
 
-    <!-- Registration / Audition CTA Section -->
+    <!-- Acting Classes: images taken from repository (previously used on programmes) and video placeholders -->
+    <section id="acting-classes" class="about-section">
+        <div class="container">
+            <h2>Acting Classes</h2>
+            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class videos (you can upload video files to the videos/ directory and update the src attributes).</p>
+
+            <!-- Image gallery (using images available in the repo) -->
+            <div class="grid-4 acting-gallery" style="gap:1rem; margin-top:1rem;">
+                <div class="card text-center">
+                    <img src="IMG-20260722-WA0022.jpg" alt="Acting class 1" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                </div>
+                <div class="card text-center">
+                    <img src="IMG-20260724-WA0004.jpg" alt="Acting class 2" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                </div>
+                <div class="card text-center">
+                    <img src="IMG-20260724-WA0005.jpg" alt="Acting class 3" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                </div>
+                <div class="card text-center">
+                    <img src="IMG-20260724-WA0010.jpg" alt="Acting class 4" style="width:100%; height:180px; object-fit:cover; border-radius:6px;">
+                </div>
+            </div>
+
+            <!-- Video placeholders (4) -->
+            <h3 style="margin-top:1.5rem;">Acting Class Videos</h3>
+            <p style="margin-bottom:0.5rem;">Four video slots for acting class uploads. Replace the source files at videos/acting1.mp4 ... videos/acting4.mp4 or update the src paths as needed.</p>
+
+            <div class="grid-2" style="gap:1rem; margin-top:1rem;">
+                <div>
+                    <video controls width="100%" poster="IMG-20260722-WA0022.jpg" style="border-radius:6px; background:#000;">
+                        <source src="videos/acting1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div>
+                    <video controls width="100%" poster="IMG-20260724-WA0004.jpg" style="border-radius:6px; background:#000;">
+                        <source src="videos/acting2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div>
+                    <video controls width="100%" poster="IMG-20260724-WA0005.jpg" style="border-radius:6px; background:#000;">
+                        <source src="videos/acting3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div>
+                    <video controls width="100%" poster="IMG-20260724-WA0010.jpg" style="border-radius:6px; background:#000;">
+                        <source src="videos/acting4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration / Audition CTA Section with Application Form -->
     <section id="register" class="cta-section">
         <div class="container cta-content text-center">
-            <h2>Ready to Take the Mic?</h2>
-            <p class="section-lead">Auditions and registrations for upcoming Ikhaya Golden Mic editions are opening! Contact our project office to find out how to participate or submit a demo.</p>
-            <div class="cta-actions" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-                <a href="tel:+27604716302" class="btn-highlight">Call +27 60 471 6302</a>
-                <a href="mailto:info@nomduva.org.za" class="btn-primary">Email Entry Inquiry</a>
-            </div>
+            <h2>Ready to Take the Mic? Apply Now</h2>
+            <p class="section-lead">Complete the form below to apply for Ikhaya Golden Mic auditions or to enrol in our acting classes. We'll contact you with next steps.</p>
+
+            <form id="applicationForm" onsubmit="return submitApplication(event)" style="max-width:720px; margin:1.5rem auto; text-align:left; background:#fff; padding:1.25rem; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,0.06);">
+                <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <div style="flex:1 1 220px;">
+                        <label for="fullname">Full Name</label>
+                        <input id="fullname" name="fullname" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 140px;">
+                        <label for="age">Age</label>
+                        <input id="age" name="age" type="number" min="6" max="120" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 220px;">
+                        <label for="phone">Phone</label>
+                        <input id="phone" name="phone" type="tel" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 220px;">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                </div>
+
+                <div style="margin-top:0.75rem;">
+                    <label for="program">Program Applying For</label>
+                    <select id="program" name="program" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <option value="Acting">Acting & Drama</option>
+                        <option value="Music">Music & Vocals</option>
+                        <option value="Rap">Rap & Hip-Hop</option>
+                        <option value="Poetry">Poetry & Spoken Word</option>
+                    </select>
+                </div>
+
+                <div style="margin-top:0.75rem;">
+                    <label for="experience">Experience / Notes</label>
+                    <textarea id="experience" name="experience" rows="4" placeholder="Tell us about your experience, why you want to join, and any special requirements." style="width:100%; padding:0.6rem; margin-top:0.35rem;"></textarea>
+                </div>
+
+                <div style="display:flex; gap:0.75rem; justify-content:flex-end; margin-top:1rem;">
+                    <button type="submit" class="btn-highlight">Submit Application</button>
+                    <a href="tel:+27604716302" class="btn-secondary" style="align-self:center; padding:0.55rem 0.9rem;">Call +27 60 471 6302</a>
+                </div>
+
+                <p style="margin-top:0.75rem; font-size:0.9rem; color:#555;">You can also email your application to <a href="mailto:info@nomduva.org.za">info@nomduva.org.za</a> or bring it to our office.</p>
+            </form>
+
         </div>
     </section>
 
@@ -195,6 +290,36 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    // Basic form submit handler - composes an email using mailto: so submissions go to info@nomduva.org.za.
+    // Note: mailto: has size limits. For larger submissions consider a server endpoint or Formspree/Netlify Forms.
+    function submitApplication(e) {
+        e.preventDefault();
+        const form = document.getElementById('applicationForm');
+        const fullname = document.getElementById('fullname').value.trim();
+        const age = document.getElementById('age').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const program = document.getElementById('program').value;
+        const experience = document.getElementById('experience').value.trim();
+
+        const subject = encodeURIComponent('Ikhaya Application - ' + program + ' - ' + fullname);
+        let body = '';
+        body += 'Full Name: ' + fullname + '\n';
+        body += 'Age: ' + age + '\n';
+        body += 'Phone: ' + phone + '\n';
+        body += 'Email: ' + email + '\n';
+        body += 'Program: ' + program + '\n\n';
+        body += 'Experience / Notes:\n' + experience + '\n\n';
+        body += 'Submitted from: ' + window.location.href + '\n';
+
+        const mailto = 'mailto:info@nomduva.org.za?subject=' + subject + '&body=' + encodeURIComponent(body);
+        // open mail client
+        window.location.href = mailto;
+        return false;
+    }
+    </script>
 
     <script src="script.js"></script>
 </body>
