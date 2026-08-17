@@ -2,42 +2,52 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nomduva.org.za/</loc>
+    <lastmod>2026-08-17</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/about.html</loc>
+    <lastmod>2026-08-16</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/programmes.html</loc>
+    <lastmod>2026-08-16</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/ikhaya.html</loc>
+    <lastmod>2026-08-17</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/projects.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/impact.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/team.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/contact.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/sponsors.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://nomduva.org.za/socials.html</loc>
+    <lastmod>2026-07-26</lastmod>
     <priority>0.60</priority>
   </url>
 </urlset>
