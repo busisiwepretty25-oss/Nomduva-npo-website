@@ -98,7 +98,7 @@
             <h2>About Ikhaya Golden Mic</h2>
             <p class="section-lead">
                 Ikhaya Golden Mic is a flagship youth talent development programme under the Nomduva Community Empowerment Project (NPO Registration: 308-012). 
-                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance misuse through engagement in positive creative activities.
+                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance abuse through creative engagement and community support.
             </p>
             
             <div class="grid-3">
@@ -148,7 +148,7 @@
     <section id="acting-classes" class="about-section">
         <div class="container">
             <h2>Acting Classes</h2>
-            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class videos (you can upload video files to the videos/ directory and update the src attributes).</p>
+            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class videos.</p>
 
             <!-- Image gallery (using images available in the repo) -->
             <div class="grid-4 acting-gallery" style="gap:1rem; margin-top:1rem;">
@@ -166,13 +166,13 @@
                 </div>
             </div>
 
-            <!-- Video placeholders (4) -->
+            <!-- Video placeholders (4) - updated to use image posters and video sources -->
             <h3 style="margin-top:1.5rem;">Acting Class Videos</h3>
             <p style="margin-bottom:0.5rem;">Four video slots for acting class uploads. Replace the source files at videos/acting1.mp4 ... videos/acting4.mp4 or update the src paths as needed.</p>
 
             <div class="grid-2" style="gap:1rem; margin-top:1rem;">
                 <div>
-                    <video controls width="100%" poster="VID-20260617-WA0557.mp4" style="border-radius:6px; background:#000;">
+                    <video controls width="100%" poster="IMG-20260722-WA0022.jpg" style="border-radius:6px; background:#000;">
                         <source src="videos/acting1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -202,50 +202,191 @@
     <!-- Registration / Audition CTA Section with Application Form -->
     <section id="register" class="cta-section">
         <div class="container cta-content text-center">
-            <h2>Ready to Take the Mic? Apply Now</h2>
-            <p class="section-lead">Complete the form below to apply for Ikhaya Golden Mic auditions or to enrol in our acting classes. We'll contact you with next steps.</p>
+            <h2>IKHAYA GOLDEN MIC Talent Development & Creative Arts Application Form</h2>
+            <p class="section-lead">Welcome to Ikhaya Golden Mic. Please complete the form below to apply for Ikhaya Golden Mic auditions or to enrol in our programmes. We'll contact you with next steps.</p>
 
-            <form id="applicationForm" onsubmit="return submitApplication(event)" style="max-width:720px; margin:1.5rem auto; text-align:left; background:#fff; padding:1.25rem; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,0.06);">
+            <form id="applicationForm" onsubmit="return submitApplication(event)" style="max-width:800px; margin:1.5rem auto; text-align:left; background:#fff; padding:1.25rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+
+                <h3>OUR FOUR CORE PILLARS</h3>
+                <p>Please select the area(s) you are interested in:</p>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+                    <label><input type="checkbox" name="pillars" value="Acting"> Acting</label>
+                    <label><input type="checkbox" name="pillars" value="Music"> Music / Musician</label>
+                    <label><input type="checkbox" name="pillars" value="Writing"> Writing</label>
+                    <label><input type="checkbox" name="pillars" value="Public Speaking & Poetry"> Public Speaking & Poetry</label>
+                </div>
+
+                <h3>1. PERSONAL INFORMATION</h3>
                 <div style="display:flex; gap:1rem; flex-wrap:wrap;">
                     <div style="flex:1 1 220px;">
-                        <label for="fullname">Full Name</label>
-                        <input id="fullname" name="fullname" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <label for="firstname">Full Name</label>
+                        <input id="firstname" name="firstname" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 220px;">
+                        <label for="surname">Surname</label>
+                        <input id="surname" name="surname" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 180px;">
+                        <label for="dob">Date of Birth</label>
+                        <input id="dob" name="dob" type="date" required style="width:100%; padding:0.45rem; margin-top:0.35rem;">
                     </div>
                     <div style="flex:1 1 140px;">
-                        <label for="age">Age</label>
-                        <input id="age" name="age" type="number" min="6" max="120" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                            <option value="">Select</option>
+                            <option>Female</option>
+                            <option>Male</option>
+                            <option>Non-binary</option>
+                            <option>Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.75rem;">
+                    <div style="flex:1 1 220px;">
+                        <label for="phone">Phone Number</label>
+                        <input id="phone" name="phone" type="tel" required pattern="[0-9+\-\s()]{6,}" placeholder="e.g. +27 60 471 6302" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
                     </div>
                     <div style="flex:1 1 220px;">
-                        <label for="phone">Phone</label>
-                        <input id="phone" name="phone" type="tel" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <label for="whatsapp">WhatsApp Number</label>
+                        <input id="whatsapp" name="whatsapp" type="tel" placeholder="Optional" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
                     </div>
-                    <div style="flex:1 1 220px;">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="email" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    <div style="flex:1 1 240px;">
+                        <label for="email">Email Address</label>
+                        <input id="email" name="email" type="email" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
                     </div>
                 </div>
 
                 <div style="margin-top:0.75rem;">
-                    <label for="program">Program Applying For</label>
-                    <select id="program" name="program" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
-                        <option value="Acting">Acting & Drama</option>
-                        <option value="Music">Music & Vocals</option>
-                        <option value="Rap">Rap & Hip-Hop</option>
-                        <option value="Poetry">Poetry & Spoken Word</option>
+                    <label for="address">Residential Address</label>
+                    <input id="address" name="address" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                </div>
+
+                <h3 style="margin-top:1rem;">2. YOUR TALENT</h3>
+                <div style="margin-top:0.35rem;">
+                    <label for="mainTalent">Which of the four core pillars best describes your main talent?</label>
+                    <select id="mainTalent" name="mainTalent" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <option value="">Select</option>
+                        <option>Acting</option>
+                        <option>Music / Musician</option>
+                        <option>Writing</option>
+                        <option>Public Speaking & Poetry</option>
                     </select>
                 </div>
 
                 <div style="margin-top:0.75rem;">
-                    <label for="experience">Experience / Notes</label>
-                    <textarea id="experience" name="experience" rows="4" placeholder="Tell us about your experience, why you want to join, and any special requirements." style="width:100%; padding:0.6rem; margin-top:0.35rem;"></textarea>
+                    <label for="talentDescription">Tell us about your talent, experience and interests</label>
+                    <textarea id="talentDescription" name="talentDescription" rows="6" placeholder="Please explain what you can do, your previous experience (if any), and what you would like to achieve through Ikhaya Golden Mic." style="width:100%; padding:0.6rem; margin-top:0.35rem;"></textarea>
                 </div>
 
-                <div style="display:flex; gap:0.75rem; justify-content:flex-end; margin-top:1rem;">
-                    <button type="submit" class="btn-highlight">Submit Application</button>
-                    <a href="tel:+27604716302" class="btn-secondary" style="align-self:center; padding:0.55rem 0.9rem;">Call +27 60 471 6302</a>
+                <h3 style="margin-top:1rem;">3. EXPERIENCE</h3>
+                <p>Have you participated in any of the following before?</p>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+                    <label><input type="checkbox" name="experienceOptions" value="Acting"> Acting / Theatre / Film / Television</label>
+                    <label><input type="checkbox" name="experienceOptions" value="Music"> Music / Singing / Performing</label>
+                    <label><input type="checkbox" name="experienceOptions" value="Writing"> Writing / Scriptwriting / Creative Writing</label>
+                    <label><input type="checkbox" name="experienceOptions" value="Poetry"> Poetry / Spoken Word</label>
+                    <label><input type="checkbox" name="experienceOptions" value="Public Speaking"> Public Speaking / Presenting</label>
+                    <label><input type="checkbox" name="experienceOptions" value="None"> None – I am a beginner</label>
                 </div>
 
-                <p style="margin-top:0.75rem; font-size:0.9rem; color:#555;">You can also email your application to <a href="mailto:info@nomduva.org.za">info@nomduva.org.za</a> or bring it to our office.</p>
+                <div style="margin-top:0.5rem;">
+                    <label for="experienceNotes">If yes, please tell us briefly about your experience:</label>
+                    <textarea id="experienceNotes" name="experienceNotes" rows="4" style="width:100%; padding:0.6rem; margin-top:0.35rem;" placeholder="Briefly describe your past experience or training."></textarea>
+                </div>
+
+                <h3 style="margin-top:1rem;">4. YOUR GOALS</h3>
+                <div style="margin-top:0.35rem;">
+                    <label for="goals">Why would you like to join Ikhaya Golden Mic?</label>
+                    <textarea id="goals" name="goals" rows="4" style="width:100%; padding:0.6rem; margin-top:0.35rem;"></textarea>
+                </div>
+
+                <div style="margin-top:0.5rem;">
+                    <label for="careerAspirations">What would you like to achieve or become in the creative industry?</label>
+                    <input id="careerAspirations" name="careerAspirations" type="text" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                </div>
+
+                <h3 style="margin-top:1rem;">5. AVAILABILITY</h3>
+                <p>Are you available to attend training, rehearsals, workshops and auditions?</p>
+                <div style="display:flex; gap:1rem; align-items:center;">
+                    <label><input type="radio" name="availability" value="Yes" required> Yes</label>
+                    <label><input type="radio" name="availability" value="No"> No</label>
+                </div>
+                <div style="margin-top:0.5rem;">
+                    <label for="preferredTimes">Preferred days/times:</label>
+                    <input id="preferredTimes" name="preferredTimes" type="text" placeholder="e.g. Weekends, Weekday evenings" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                </div>
+
+                <h3 style="margin-top:1rem;">6. ADDITIONAL INFORMATION</h3>
+                <div>
+                    <label for="additionalInfo">Do you have any special skills, talents or achievements you would like us to know about?</label>
+                    <textarea id="additionalInfo" name="additionalInfo" rows="3" style="width:100%; padding:0.6rem; margin-top:0.35rem;"></textarea>
+                </div>
+
+                <h3 style="margin-top:1rem;">7. PARENT / GUARDIAN INFORMATION</h3>
+                <p>Required for applicants under 18.</p>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <div style="flex:1 1 240px;">
+                        <label for="guardianName">Parent/Guardian Full Name</label>
+                        <input id="guardianName" name="guardianName" type="text" placeholder="If applicant is under 18" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 160px;">
+                        <label for="guardianRelation">Relationship to Applicant</label>
+                        <input id="guardianRelation" name="guardianRelation" type="text" placeholder="e.g. Mother, Father, Guardian" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 200px;">
+                        <label for="guardianContact">Contact Number</label>
+                        <input id="guardianContact" name="guardianContact" type="tel" placeholder="If applicant is under 18" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 240px;">
+                        <label for="guardianEmail">Email Address</label>
+                        <input id="guardianEmail" name="guardianEmail" type="email" placeholder="If applicant is under 18" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                </div>
+
+                <h3 style="margin-top:1rem;">8. SUPPORTING INFORMATION</h3>
+                <p>Applicants may be requested to provide: a recent photograph, CV or talent profile, examples of previous work, and audition material where applicable.</p>
+
+                <!-- File inputs (note: mailto cannot attach files; attachments must be sent via email to info@nomduva.org.za) -->
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
+                    <div style="flex:1 1 240px;">
+                        <label for="photo">Upload recent photograph (optional)</label>
+                        <input id="photo" name="photo" type="file" accept="image/*" style="width:100%; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 240px;">
+                        <label for="cv">Upload CV / Talent profile (optional)</label>
+                        <input id="cv" name="cv" type="file" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="width:100%; margin-top:0.35rem;">
+                    </div>
+                    <div style="flex:1 1 240px;">
+                        <label for="sample">Link to sample audio/video or portfolio (optional)</label>
+                        <input id="sample" name="sample" type="url" placeholder="https://" style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                    </div>
+                </div>
+
+                <div style="margin-top:0.75rem;">
+                    <strong>Declaration</strong>
+                    <p>I confirm that the information provided in this application is true and correct. I understand that submitting this application does not automatically guarantee acceptance into the programme. I agree to participate in auditions, assessments, training, rehearsals and other programme activities if selected.</p>
+                    <label style="display:block; margin-top:0.35rem;"><input type="checkbox" id="declaration" required> I confirm the declaration above</label>
+                </div>
+
+                <div style="display:flex; gap:0.75rem; justify-content:space-between; align-items:center; margin-top:1rem;">
+                    <div style="flex:1 1 60%;">
+                        <label for="applicantName">Applicant Name</label>
+                        <input id="applicantName" name="applicantName" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <label for="applicantSignature" style="margin-top:0.5rem; display:block;">Signature (type full name)</label>
+                        <input id="applicantSignature" name="applicantSignature" type="text" required style="width:100%; padding:0.6rem; margin-top:0.35rem;">
+                        <label for="applicantDate" style="margin-top:0.5rem; display:block;">Date</label>
+                        <input id="applicantDate" name="applicantDate" type="date" required style="width:100%; padding:0.45rem; margin-top:0.35rem;">
+
+                        <p style="font-size:0.9rem; color:#666; margin-top:0.5rem;">For applicants under 18 – Parent/Guardian Signature is required. Please email attachments (photo/CV/video) to <a href="mailto:info@nomduva.org.za">info@nomduva.org.za</a> if you need to include files with your application.</p>
+                    </div>
+
+                    <div style="flex:1 1 35%; text-align:right;">
+                        <button type="submit" class="btn-highlight" style="display:inline-block;">Submit Application</button>
+                        <a href="tel:+27604716302" class="btn-secondary" style="display:inline-block; margin-left:0.5rem; padding:0.55rem 0.9rem;">Call / WhatsApp +27 60 471 6302</a>
+                    </div>
+                </div>
+
             </form>
 
         </div>
@@ -292,30 +433,113 @@
     </footer>
 
     <script>
-    // Basic form submit handler - composes an email using mailto: so submissions go to info@nomduva.org.za.
-    // Note: mailto: has size limits. For larger submissions consider a server endpoint or Formspree/Netlify Forms.
+    // Enhanced form submit handler - composes an email using mailto: so submissions go to info@nomduva.org.za.
+    // Note: mailto: has size limits and cannot attach files. Users with attachments should send them directly to info@nomduva.org.za.
     function submitApplication(e) {
         e.preventDefault();
-        const form = document.getElementById('applicationForm');
-        const fullname = document.getElementById('fullname').value.trim();
-        const age = document.getElementById('age').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const program = document.getElementById('program').value;
-        const experience = document.getElementById('experience').value.trim();
+        const getValue = id => (document.getElementById(id) ? document.getElementById(id).value.trim() : '');
 
-        const subject = encodeURIComponent('Ikhaya Application - ' + program + ' - ' + fullname);
+        // Personal
+        const firstname = getValue('firstname');
+        const surname = getValue('surname');
+        const dob = getValue('dob');
+        const gender = getValue('gender');
+        const phone = getValue('phone');
+        const whatsapp = getValue('whatsapp');
+        const email = getValue('email');
+        const address = getValue('address');
+
+        // Pillars
+        const pillars = Array.from(document.querySelectorAll('input[name="pillars"]:checked')).map(i=>i.value).join(', ');
+
+        // Talent
+        const mainTalent = getValue('mainTalent');
+        const talentDescription = getValue('talentDescription');
+
+        // Experience
+        const expOptions = Array.from(document.querySelectorAll('input[name="experienceOptions"]:checked')).map(i=>i.value).join(', ');
+        const experienceNotes = getValue('experienceNotes');
+
+        // Goals
+        const goals = getValue('goals');
+        const careerAspirations = getValue('careerAspirations');
+
+        // Availability
+        const availability = (document.querySelector('input[name="availability"]:checked') || {}).value || '';
+        const preferredTimes = getValue('preferredTimes');
+
+        // Additional
+        const additionalInfo = getValue('additionalInfo');
+
+        // Guardian
+        const guardianName = getValue('guardianName');
+        const guardianRelation = getValue('guardianRelation');
+        const guardianContact = getValue('guardianContact');
+        const guardianEmail = getValue('guardianEmail');
+
+        // Supporting
+        const sample = getValue('sample');
+
+        // Declaration & signature
+        const declarationAccepted = document.getElementById('declaration') ? document.getElementById('declaration').checked : false;
+        if(!declarationAccepted) { alert('Please confirm the declaration to continue.'); return false; }
+
+        const applicantName = getValue('applicantName');
+        const applicantSignature = getValue('applicantSignature');
+        const applicantDate = getValue('applicantDate');
+
+        const subject = encodeURIComponent('Ikhaya Application - ' + (mainTalent || 'Applicant') + ' - ' + firstname + ' ' + surname);
+
         let body = '';
-        body += 'Full Name: ' + fullname + '\n';
-        body += 'Age: ' + age + '\n';
+        body += 'IKHAYA GOLDEN MIC APPLICATION\n\n';
+        body += 'Pillars: ' + pillars + '\n\n';
+        body += '1. PERSONAL INFORMATION\n';
+        body += 'Full Name: ' + firstname + ' ' + surname + '\n';
+        body += 'Date of Birth: ' + dob + '\n';
+        body += 'Gender: ' + gender + '\n';
         body += 'Phone: ' + phone + '\n';
+        body += 'WhatsApp: ' + whatsapp + '\n';
         body += 'Email: ' + email + '\n';
-        body += 'Program: ' + program + '\n\n';
-        body += 'Experience / Notes:\n' + experience + '\n\n';
+        body += 'Address: ' + address + '\n\n';
+
+        body += '2. YOUR TALENT\n';
+        body += 'Main Talent: ' + mainTalent + '\n';
+        body += 'Talent Description:\n' + talentDescription + '\n\n';
+
+        body += '3. EXPERIENCE\n';
+        body += 'Previous Experience: ' + expOptions + '\n';
+        body += 'Experience Notes:\n' + experienceNotes + '\n\n';
+
+        body += '4. YOUR GOALS\n';
+        body += 'Why join: ' + goals + '\n';
+        body += 'Career Aspirations: ' + careerAspirations + '\n\n';
+
+        body += '5. AVAILABILITY\n';
+        body += 'Available: ' + availability + '\n';
+        body += 'Preferred times: ' + preferredTimes + '\n\n';
+
+        body += '6. ADDITIONAL INFORMATION\n' + additionalInfo + '\n\n';
+
+        body += '7. PARENT/GUARDIAN (if applicable)\n';
+        body += 'Guardian Name: ' + guardianName + '\n';
+        body += 'Relation: ' + guardianRelation + '\n';
+        body += 'Guardian Contact: ' + guardianContact + '\n';
+        body += 'Guardian Email: ' + guardianEmail + '\n\n';
+
+        body += '8. SUPPORTING INFORMATION\n';
+        body += 'Sample link: ' + sample + '\n';
+        body += '(Photo/CV/Video should be emailed to info@nomduva.org.za if required)\n\n';
+
+        body += 'DECLARATION\n';
+        body += 'Applicant Name: ' + applicantName + '\n';
+        body += 'Applicant Signature: ' + applicantSignature + '\n';
+        body += 'Date: ' + applicantDate + '\n\n';
+
         body += 'Submitted from: ' + window.location.href + '\n';
 
         const mailto = 'mailto:info@nomduva.org.za?subject=' + subject + '&body=' + encodeURIComponent(body);
-        // open mail client
+
+        // Open mail client
         window.location.href = mailto;
         return false;
     }
