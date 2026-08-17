@@ -205,7 +205,8 @@
             <h2>IKHAYA GOLDEN MIC Talent Development & Creative Arts Application Form</h2>
             <p class="section-lead">Welcome to Ikhaya Golden Mic. Please complete the form below to apply for Ikhaya Golden Mic auditions or to enrol in our programmes. We'll contact you with next steps.</p>
 
-            <form id="applicationForm" onsubmit="return submitApplication(event)" style="max-width:800px; margin:1.5rem auto; text-align:left; background:#fff; padding:1.25rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
+            <!-- Formspree form: configured with your Formspree endpoint -->
+            <form id="applicationForm" action="https://formspree.io/f/mqpzybgg" method="POST" enctype="multipart/form-data" style="max-width:800px; margin:1.5rem auto; text-align:left; background:#fff; padding:1.25rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.06);">
 
                 <h3>OUR FOUR CORE PILLARS</h3>
                 <p>Please select the area(s) you are interested in:</p>
@@ -347,7 +348,7 @@
                 <h3 style="margin-top:1rem;">8. SUPPORTING INFORMATION</h3>
                 <p>Applicants may be requested to provide: a recent photograph, CV or talent profile, examples of previous work, and audition material where applicable.</p>
 
-                <!-- File inputs (note: mailto cannot attach files; attachments must be sent via email to info@nomduva.org.za) -->
+                <!-- File inputs (Formspree supports file uploads on paid plans) -->
                 <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
                     <div style="flex:1 1 240px;">
                         <label for="photo">Upload recent photograph (optional)</label>
@@ -366,7 +367,7 @@
                 <div style="margin-top:0.75rem;">
                     <strong>Declaration</strong>
                     <p>I confirm that the information provided in this application is true and correct. I understand that submitting this application does not automatically guarantee acceptance into the programme. I agree to participate in auditions, assessments, training, rehearsals and other programme activities if selected.</p>
-                    <label style="display:block; margin-top:0.35rem;"><input type="checkbox" id="declaration" required> I confirm the declaration above</label>
+                    <label style="display:block; margin-top:0.35rem;"><input type="checkbox" id="declaration" name="declaration" required> I confirm the declaration above</label>
                 </div>
 
                 <div style="display:flex; gap:0.75rem; justify-content:space-between; align-items:center; margin-top:1rem;">
@@ -378,7 +379,7 @@
                         <label for="applicantDate" style="margin-top:0.5rem; display:block;">Date</label>
                         <input id="applicantDate" name="applicantDate" type="date" required style="width:100%; padding:0.45rem; margin-top:0.35rem;">
 
-                        <p style="font-size:0.9rem; color:#666; margin-top:0.5rem;">For applicants under 18 – Parent/Guardian Signature is required. Please email attachments (photo/CV/video) to <a href="mailto:info@nomduva.org.za">info@nomduva.org.za</a> if you need to include files with your application.</p>
+                        <p style="font-size:0.9rem; color:#666; margin-top:0.5rem;">For applicants under 18 – Parent/Guardian Signature is required. Please email attachments (photo/CV/video) to <a href="mailto:info@nomduva.org.za">info@nomduva.org.za</a> if you need to include files with your application or if your plan doesn't support file uploads.</p>
                     </div>
 
                     <div style="flex:1 1 35%; text-align:right;">
@@ -388,6 +389,8 @@
                 </div>
 
             </form>
+
+            <div id="formMessage" style="max-width:800px; margin:0.75rem auto; text-align:center; display:none;"></div>
 
         </div>
     </section>
@@ -433,116 +436,80 @@
     </footer>
 
     <script>
-    // Enhanced form submit handler - composes an email using mailto: so submissions go to info@nomduva.org.za.
-    // Note: mailto: has size limits and cannot attach files. Users with attachments should send them directly to info@nomduva.org.za.
-    function submitApplication(e) {
+    // Formspree submission via fetch so we can show an inline success message and keep users on the page.
+    // Endpoint is configured on the form action attribute.
+    (function() {
+      const form = document.getElementById('applicationForm');
+      const messageBox = document.getElementById('formMessage');
+      const endpoint = form.action; // uses configured Formspree endpoint
+
+      form.addEventListener('submit', async function (e) {
         e.preventDefault();
-        const getValue = id => (document.getElementById(id) ? document.getElementById(id).value.trim() : '');
+        messageBox.style.display = 'none';
+        messageBox.textContent = '';
 
-        // Personal
-        const firstname = getValue('firstname');
-        const surname = getValue('surname');
-        const dob = getValue('dob');
-        const gender = getValue('gender');
-        const phone = getValue('phone');
-        const whatsapp = getValue('whatsapp');
-        const email = getValue('email');
-        const address = getValue('address');
+        // Basic client-side validation: ensure declaration checked
+        const declaration = document.getElementById('declaration');
+        if (!declaration || !declaration.checked) {
+          alert('Please confirm the declaration to continue.');
+          return;
+        }
 
-        // Pillars
-        const pillars = Array.from(document.querySelectorAll('input[name="pillars"]:checked')).map(i=>i.value).join(', ');
+        // Build FormData from the form
+        const formData = new FormData(form);
 
-        // Talent
-        const mainTalent = getValue('mainTalent');
-        const talentDescription = getValue('talentDescription');
+        // Add a subject and reply-to
+        const firstname = (formData.get('firstname') || '').toString().trim();
+        const surname = (formData.get('surname') || '').toString().trim();
+        const mainTalent = (formData.get('mainTalent') || '').toString().trim();
+        const email = (formData.get('email') || '').toString().trim();
+        formData.set('_subject', `Ikhaya Application - ${mainTalent || 'Applicant'} - ${firstname} ${surname}`);
+        if (email) formData.set('_replyto', email);
 
-        // Experience
-        const expOptions = Array.from(document.querySelectorAll('input[name="experienceOptions"]:checked')).map(i=>i.value).join(', ');
-        const experienceNotes = getValue('experienceNotes');
+        // Optional: disable submit while sending
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) submitButton.disabled = true;
 
-        // Goals
-        const goals = getValue('goals');
-        const careerAspirations = getValue('careerAspirations');
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
 
-        // Availability
-        const availability = (document.querySelector('input[name="availability"]:checked') || {}).value || '';
-        const preferredTimes = getValue('preferredTimes');
-
-        // Additional
-        const additionalInfo = getValue('additionalInfo');
-
-        // Guardian
-        const guardianName = getValue('guardianName');
-        const guardianRelation = getValue('guardianRelation');
-        const guardianContact = getValue('guardianContact');
-        const guardianEmail = getValue('guardianEmail');
-
-        // Supporting
-        const sample = getValue('sample');
-
-        // Declaration & signature
-        const declarationAccepted = document.getElementById('declaration') ? document.getElementById('declaration').checked : false;
-        if(!declarationAccepted) { alert('Please confirm the declaration to continue.'); return false; }
-
-        const applicantName = getValue('applicantName');
-        const applicantSignature = getValue('applicantSignature');
-        const applicantDate = getValue('applicantDate');
-
-        const subject = encodeURIComponent('Ikhaya Application - ' + (mainTalent || 'Applicant') + ' - ' + firstname + ' ' + surname);
-
-        let body = '';
-        body += 'IKHAYA GOLDEN MIC APPLICATION\n\n';
-        body += 'Pillars: ' + pillars + '\n\n';
-        body += '1. PERSONAL INFORMATION\n';
-        body += 'Full Name: ' + firstname + ' ' + surname + '\n';
-        body += 'Date of Birth: ' + dob + '\n';
-        body += 'Gender: ' + gender + '\n';
-        body += 'Phone: ' + phone + '\n';
-        body += 'WhatsApp: ' + whatsapp + '\n';
-        body += 'Email: ' + email + '\n';
-        body += 'Address: ' + address + '\n\n';
-
-        body += '2. YOUR TALENT\n';
-        body += 'Main Talent: ' + mainTalent + '\n';
-        body += 'Talent Description:\n' + talentDescription + '\n\n';
-
-        body += '3. EXPERIENCE\n';
-        body += 'Previous Experience: ' + expOptions + '\n';
-        body += 'Experience Notes:\n' + experienceNotes + '\n\n';
-
-        body += '4. YOUR GOALS\n';
-        body += 'Why join: ' + goals + '\n';
-        body += 'Career Aspirations: ' + careerAspirations + '\n\n';
-
-        body += '5. AVAILABILITY\n';
-        body += 'Available: ' + availability + '\n';
-        body += 'Preferred times: ' + preferredTimes + '\n\n';
-
-        body += '6. ADDITIONAL INFORMATION\n' + additionalInfo + '\n\n';
-
-        body += '7. PARENT/GUARDIAN (if applicable)\n';
-        body += 'Guardian Name: ' + guardianName + '\n';
-        body += 'Relation: ' + guardianRelation + '\n';
-        body += 'Guardian Contact: ' + guardianContact + '\n';
-        body += 'Guardian Email: ' + guardianEmail + '\n\n';
-
-        body += '8. SUPPORTING INFORMATION\n';
-        body += 'Sample link: ' + sample + '\n';
-        body += '(Photo/CV/Video should be emailed to info@nomduva.org.za if required)\n\n';
-
-        body += 'DECLARATION\n';
-        body += 'Applicant Name: ' + applicantName + '\n';
-        body += 'Applicant Signature: ' + applicantSignature + '\n';
-        body += 'Date: ' + applicantDate + '\n\n';
-
-        body += 'Submitted from: ' + window.location.href + '\n';
-
-        const mailto = 'mailto:info@nomduva.org.za?subject=' + subject + '&body=' + encodeURIComponent(body);
-
-        // Open mail client
-        window.location.href = mailto;
-        return false;
-    }
+          if (res.ok) {
+            messageBox.style.display = 'block';
+            messageBox.style.color = '#155724';
+            messageBox.style.background = '#d4edda';
+            messageBox.style.padding = '10px';
+            messageBox.style.borderRadius = '6px';
+            messageBox.textContent = 'Thank you — your application has been submitted. We will contact you shortly.';
+            form.reset();
+          } else {
+            const data = await res.json();
+            let err = 'Submission failed. Please try again later.';
+            if (data && data.errors) err = data.errors.map(e=>e.message).join(', ');
+            messageBox.style.display = 'block';
+            messageBox.style.color = '#721c24';
+            messageBox.style.background = '#f8d7da';
+            messageBox.style.padding = '10px';
+            messageBox.style.borderRadius = '6px';
+            messageBox.textContent = err;
+          }
+        } catch (error) {
+          messageBox.style.display = 'block';
+          messageBox.style.color = '#721c24';
+          messageBox.style.background = '#f8d7da';
+          messageBox.style.padding = '10px';
+          messageBox.style.borderRadius = '6px';
+          messageBox.textContent = 'Network error — please check your connection and try again.';
+        } finally {
+          if (submitButton) submitButton.disabled = false;
+        }
+      });
+    })();
     </script>
 
     <script src="script.js"></script>
