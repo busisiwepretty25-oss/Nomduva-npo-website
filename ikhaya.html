@@ -88,6 +88,71 @@
 
     /* Hide overlay when not needed */
     .hidden { display:none !important; }
+
+    /* Inquiry Form Styles */
+    .inquiry-form {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .inquiry-form .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .inquiry-form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .inquiry-form input[type="text"],
+    .inquiry-form input[type="email"],
+    .inquiry-form input[type="tel"],
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .inquiry-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .inquiry-form input:focus,
+    .inquiry-form textarea:focus {
+      outline: none;
+      border-color: #1f8ef1;
+      box-shadow: 0 0 4px rgba(31, 142, 241, 0.3);
+    }
+    .inquiry-form button {
+      background: #1f8ef1;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: 0;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .inquiry-form button:hover {
+      background: #1568c0;
+    }
+    .form-success {
+      background: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .form-success.show {
+      display: block;
+    }
     </style>
 </head>
 <body class="ikhaya-site">
@@ -96,7 +161,7 @@
     <div id="auth-overlay" class="hidden" aria-hidden="true">
       <div id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
         <h3 id="auth-title">Sign up or Log in to continue</h3>
-        <p style="margin-top:0; color:#444;">To access the Ikhaya Golden Mic page and the application form you must create a simple account (name + email) or sign in if you already registered. This site uses client-side storage only — no server account is created.</p>
+        <p style="margin-top:0; color:#444;">To access the Ikhaya Golden Mic page you must create a simple account (name + email) or sign in if you already registered. This helps us keep track of your interest in our programmes.</p>
 
         <div id="auth-forms">
           <!-- Signup form -->
@@ -125,7 +190,7 @@
           </form>
         </div>
 
-        <p style="font-size:0.85rem; color:#666; margin-top:0.75rem;">Privacy note: this demo stores only the name and email in your browser's localStorage so the page can remember you. If you need server-based accounts, we can integrate Firebase/Auth or a backend.</p>
+        <p style="font-size:0.85rem; color:#666; margin-top:0.75rem;">Privacy note: this stores only your name and email in your browser's localStorage so we can remember you. Your data is secure and private.</p>
       </div>
     </div>
 
@@ -169,7 +234,7 @@
             <h1>Ikhaya Golden Mic 2026</h1>
             <p>Discovering talent, nurturing creativity, and empowering youth through music, performance, acting, and arts development.</p>
             <div class="hero-buttons">
-                <a href="#register" class="btn-highlight">Register / Audition</a>
+                <a href="#register" class="btn-highlight">Get In Touch</a>
                 <a href="#about-event" class="btn-secondary">Event Details</a>
             </div>
         </div>
@@ -181,7 +246,7 @@
             <h2>About Ikhaya Golden Mic</h2>
             <p class="section-lead">
                 Ikhaya Golden Mic is a flagship youth talent development programme under the Nomduva Community Empowerment Project (NPO Registration: 308-012). 
-                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance [...]
+                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance abuse and anti-social behaviour.
             </p>
             
             <div class="grid-3">
@@ -231,7 +296,7 @@
     <section id="acting-classes" class="about-section">
         <div class="container">
             <h2>Acting Classes</h2>
-            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class v[...]
+            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class videos.</p>
 
             <!-- Image gallery (using images available in the repo) -->
             <div class="grid-4 acting-gallery" style="gap:1rem; margin-top:1rem;">
@@ -282,25 +347,50 @@
         </div>
     </section>
 
-    <!-- Registration / Audition CTA Section with embedded Google Form -->
+    <!-- Inquiry Section (Replaced Application Form) -->
     <section id="register" class="cta-section">
-        <div class="container cta-content text-center">
-            <h2>IKHAYA GOLDEN MIC Talent Development & Creative Arts Application Form</h2>
-            <p class="section-lead">Welcome to Ikhaya Golden Mic. Please complete the application form below. Note: file uploads require signing in with a Google account.</p>
+        <div class="container cta-content">
+            <h2>Get In Touch With Ikhaya Golden Mic</h2>
+            <p class="section-lead">Interested in participating, sponsoring, or learning more about our talent development programme? Send us an inquiry and we'll get back to you shortly.</p>
 
-            <!-- Embedded Google Form (only accessible when signed-in) -->
-            <div id="google-form-container" style="max-width:900px; margin:1.5rem auto; text-align:left; opacity:1;">
-                <p style="font-weight:600;">Important: To upload files you must be signed in to a Google account. If you do not have one, please create a Google account at <a href="https://accounts.google.com/">https://accounts.google.com/</a></p>
-
-                <div class="form-iframe" style="background:#fff; padding:0.5rem; border-radius:6px; box-shadow:0 1px 4px rgba(0,0,0,0.06);">
-                  <iframe id="gform-iframe" src="https://forms.gle/aYJDmE7NykBP92ZC9?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <form class="inquiry-form" id="inquiry-form">
+                <div class="form-success" id="form-success">
+                    Thank you for your inquiry! We'll be in touch with you soon.
                 </div>
 
-                <p style="margin-top:0.75rem; color:#555;">If the form does not load on your device, open it in a new tab: <a id="gform-link" href="https://forms.gle/aYJDmE7NykBP92ZC9" target="_blank" rel="noopener">https://forms.gle/aYJDmE7NykBP92ZC9</a></p>
+                <div class="form-group">
+                    <label for="inquiry-name">Full Name *</label>
+                    <input type="text" id="inquiry-name" name="name" required placeholder="Your full name">
+                </div>
 
-                <p style="font-size:0.9rem; color:#666; margin-top:0.5rem;">Privacy: By submitting this application you consent to Nomduva NCEP storing and using your data and uploaded files for [...]</p>
+                <div class="form-group">
+                    <label for="inquiry-email">Email Address *</label>
+                    <input type="email" id="inquiry-email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="inquiry-phone">Phone Number</label>
+                    <input type="tel" id="inquiry-phone" name="phone" placeholder="+27 60 000 0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="inquiry-subject">Subject *</label>
+                    <input type="text" id="inquiry-subject" name="subject" required placeholder="e.g., Audition Inquiry, Sponsorship, General Question">
+                </div>
+
+                <div class="form-group">
+                    <label for="inquiry-message">Message *</label>
+                    <textarea id="inquiry-message" name="message" required placeholder="Tell us more about your inquiry..."></textarea>
+                </div>
+
+                <button type="submit">Send Inquiry</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 2rem; color: #666;">
+                <p><strong>Or contact us directly:</strong></p>
+                <p>📧 Email: <a href="mailto:info@nomduva.org.za">info@nomduva.org.za</a></p>
+                <p>📞 Phone: <a href="tel:+27604716302">+27 60 471 6302</a></p>
             </div>
-
         </div>
     </section>
 
@@ -411,33 +501,44 @@
         if(confirm('Log out?')){ clearStoredUser(); updateHeader(); showOverlay(); }
       });
 
-      // On load: if no user, show overlay and disable the embedded form
+      // On load: update header and show overlay
       document.addEventListener('DOMContentLoaded', function(){
-        const user = getStoredUser();
-        const iframe = document.getElementById('gform-iframe');
-        if(!user){
-          showOverlay();
-          // Remove iframe src to avoid loading before login; keep link available
-          if(iframe){ iframe.dataset.src = iframe.src; iframe.src = 'about:blank'; }
-        } else {
-          // ensure iframe uses stored src if previously removed
-          if(iframe && !iframe.src.replace(location.origin,'').trim()){
-            iframe.src = iframe.dataset.src || iframe.src;
-          }
-        }
         updateHeader();
       });
 
-      // When overlay hides (user signed up/logged in), restore iframe src if needed
-      const observer = new MutationObserver(function(){
-        if(overlay.classList.contains('hidden')){
-          const iframe = document.getElementById('gform-iframe');
-          if(iframe && iframe.dataset && iframe.dataset.src){ iframe.src = iframe.dataset.src; }
-        }
-      });
-      observer.observe(overlay, { attributes:true, attributeFilter:['class'] });
-
     })();
+    </script>
+
+    <!-- Inquiry Form Handler -->
+    <script>
+    document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('inquiry-name').value,
+        email: document.getElementById('inquiry-email').value,
+        phone: document.getElementById('inquiry-phone').value,
+        subject: document.getElementById('inquiry-subject').value,
+        message: document.getElementById('inquiry-message').value,
+        timestamp: new Date().toISOString()
+      };
+
+      // Store inquiry in localStorage
+      let inquiries = JSON.parse(localStorage.getItem('nomduva_inquiries') || '[]');
+      inquiries.push(formData);
+      localStorage.setItem('nomduva_inquiries', JSON.stringify(inquiries));
+
+      // Show success message
+      document.getElementById('form-success').classList.add('show');
+
+      // Reset form
+      this.reset();
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('form-success').classList.remove('show');
+      }, 5000);
+    });
     </script>
 
     <script src="script.js"></script>
