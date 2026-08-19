@@ -50,45 +50,8 @@
     }
     </script>
 
-    <!-- Lightweight styles for client-side gating modal -->
+    <!-- Styles -->
     <style>
-    /* Modal overlay for sign up / login gating */
-    #auth-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      padding: 1rem;
-    }
-    #auth-modal {
-      background: #fff;
-      max-width: 420px;
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-      padding: 1rem 1.25rem;
-      font-family: inherit;
-    }
-    #auth-modal h3 { margin-top:0; }
-    #auth-modal label { display:block; margin:0.5rem 0 0.25rem; font-size:0.95rem; }
-    #auth-modal input[type="text"],
-    #auth-modal input[type="email"],
-    #auth-modal input[type="password"]{ width:100%; padding:0.5rem; border-radius:4px; border:1px solid #ddd; }
-    #auth-modal .auth-actions { display:flex; gap:0.5rem; margin-top:0.75rem; }
-    #auth-modal button{ padding:0.5rem 0.75rem; border-radius:4px; border:0; cursor:pointer; }
-    #auth-modal .btn-primary{ background:#1f8ef1; color:#fff; }
-    #auth-modal .btn-secondary{ background:#eee; }
-
-    /* Small user badge in header */
-    #auth-area { display:flex; gap:0.5rem; align-items:center; font-size:0.95rem; }
-    #auth-area .user-name { font-weight:600; }
-
-    /* Hide overlay when not needed */
-    .hidden { display:none !important; }
-
     /* Inquiry Form Styles */
     .inquiry-form {
       max-width: 700px;
@@ -157,43 +120,6 @@
 </head>
 <body class="ikhaya-site">
 
-    <!-- Authentication overlay (client-side) -->
-    <div id="auth-overlay" class="hidden" aria-hidden="true">
-      <div id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-        <h3 id="auth-title">Sign up or Log in to continue</h3>
-        <p style="margin-top:0; color:#444;">To access the Ikhaya Golden Mic page you must create a simple account (name + email) or sign in if you already registered. This helps us keep track of your interest in our programmes.</p>
-
-        <div id="auth-forms">
-          <!-- Signup form -->
-          <form id="signup-form">
-            <label for="signup-name">Full name</label>
-            <input id="signup-name" name="name" type="text" required placeholder="Your full name">
-
-            <label for="signup-email">Email</label>
-            <input id="signup-email" name="email" type="email" required placeholder="you@example.com">
-
-            <div class="auth-actions">
-              <button type="submit" class="btn-primary">Sign up</button>
-              <button type="button" id="show-login" class="btn-secondary">Already registered?</button>
-            </div>
-          </form>
-
-          <!-- Login form (hidden initially) -->
-          <form id="login-form" class="hidden">
-            <label for="login-email">Email</label>
-            <input id="login-email" name="email" type="email" required placeholder="you@example.com">
-
-            <div class="auth-actions">
-              <button type="submit" class="btn-primary">Log in</button>
-              <button type="button" id="show-signup" class="btn-secondary">Create account</button>
-            </div>
-          </form>
-        </div>
-
-        <p style="font-size:0.85rem; color:#666; margin-top:0.75rem;">Privacy note: this stores only your name and email in your browser's localStorage so we can remember you. Your data is secure and private.</p>
-      </div>
-    </div>
-
     <!-- Header / Navigation -->
     <header class="site-header">
         <div class="container nav-container">
@@ -219,11 +145,6 @@
                 </ul>
             </nav>
 
-            <!-- Auth area: shows name and logout when signed-in -->
-            <div id="auth-area" style="margin-left:1rem;">
-              <span id="auth-welcome" class="hidden">Hello, <span class="user-name"></span></span>
-              <button id="auth-logout" class="hidden" style="background:#f44336;color:#fff;border:0;padding:6px 8px;border-radius:4px;cursor:pointer;">Log out</button>
-            </div>
         </div>
     </header>
 
@@ -246,7 +167,7 @@
             <h2>About Ikhaya Golden Mic</h2>
             <p class="section-lead">
                 Ikhaya Golden Mic is a flagship youth talent development programme under the Nomduva Community Empowerment Project (NPO Registration: 308-012). 
-                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance abuse and anti-social behaviour.
+                We provide a structured platform for aspiring young artists to showcase their performing talents, receive professional mentorship, build confidence, and steer away from substance [...]
             </p>
             
             <div class="grid-3">
@@ -296,7 +217,7 @@
     <section id="acting-classes" class="about-section">
         <div class="container">
             <h2>Acting Classes</h2>
-            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class videos.</p>
+            <p class="section-lead">Our acting programme focuses on screen presence, character development and stagecraft. Below are photos from our sessions and placeholders for upcoming class v[...]
 
             <!-- Image gallery (using images available in the repo) -->
             <div class="grid-4 acting-gallery" style="gap:1rem; margin-top:1rem;">
@@ -433,81 +354,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Authentication logic (client-side only) -->
-    <script>
-    (function(){
-      const overlay = document.getElementById('auth-overlay');
-      const signupForm = document.getElementById('signup-form');
-      const loginForm = document.getElementById('login-form');
-      const showLoginBtn = document.getElementById('show-login');
-      const showSignupBtn = document.getElementById('show-signup');
-      const authWelcome = document.getElementById('auth-welcome');
-      const authLogout = document.getElementById('auth-logout');
-      const userNameSpan = document.querySelector('#auth-area .user-name');
-
-      function getStoredUser(){
-        try { return JSON.parse(localStorage.getItem('nomduva_user')); } catch(e){ return null; }
-      }
-
-      function setStoredUser(user){
-        localStorage.setItem('nomduva_user', JSON.stringify(user));
-      }
-
-      function clearStoredUser(){
-        localStorage.removeItem('nomduva_user');
-      }
-
-      function showOverlay(){ overlay.classList.remove('hidden'); overlay.setAttribute('aria-hidden','false'); }
-      function hideOverlay(){ overlay.classList.add('hidden'); overlay.setAttribute('aria-hidden','true'); }
-
-      function updateHeader(){
-        const user = getStoredUser();
-        if(user && user.name){
-          authWelcome.classList.remove('hidden');
-          authLogout.classList.remove('hidden');
-          userNameSpan.textContent = user.name.split(' ')[0];
-        } else {
-          authWelcome.classList.add('hidden');
-          authLogout.classList.add('hidden');
-        }
-      }
-
-      // Toggle between signup and login forms
-      showLoginBtn.addEventListener('click', function(){ signupForm.classList.add('hidden'); loginForm.classList.remove('hidden'); });
-      showSignupBtn.addEventListener('click', function(){ loginForm.classList.add('hidden'); signupForm.classList.remove('hidden'); });
-
-      signupForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        const name = document.getElementById('signup-name').value.trim();
-        const email = document.getElementById('signup-email').value.trim().toLowerCase();
-        if(!name || !email){ alert('Please enter name and email'); return; }
-        setStoredUser({name:name, email:email});
-        hideOverlay();
-        updateHeader();
-      });
-
-      loginForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        const email = document.getElementById('login-email').value.trim().toLowerCase();
-        const stored = getStoredUser();
-        if(!stored){ alert('No account found. Please create an account.'); return; }
-        if(stored.email !== email){ alert('Email does not match the registered account.'); return; }
-        hideOverlay();
-        updateHeader();
-      });
-
-      authLogout.addEventListener('click', function(){
-        if(confirm('Log out?')){ clearStoredUser(); updateHeader(); showOverlay(); }
-      });
-
-      // On load: update header and show overlay
-      document.addEventListener('DOMContentLoaded', function(){
-        updateHeader();
-      });
-
-    })();
-    </script>
 
     <!-- Inquiry Form Handler -->
     <script>
